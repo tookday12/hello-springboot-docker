@@ -9,11 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 //@PropertySource("application-site.properties")
 public class SiteProperties {
-   
-	
-	
 //	@Value("${siteName}")
 	private String siteName;
+	
 	
 //	@Value("${siteId}")
 	private int siteId;
