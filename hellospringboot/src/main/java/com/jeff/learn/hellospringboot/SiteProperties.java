@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 //@PropertySource("application-site.properties")
 public class SiteProperties {
    
+	
+	
 //	@Value("${siteName}")
 	private String siteName;
 	
