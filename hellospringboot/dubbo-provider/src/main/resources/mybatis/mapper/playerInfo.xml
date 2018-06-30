@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeff.learn.dubbo.provider.PlayerInfoMapper">
+	<!-- <resultMap type="playerInfo" id="playerMap">
+		<id property="id" column="id"/>
+		<result property="accountId" column="account_id"/>
+		<result property="agentId" column="agent_id"/>
+		<result property="userName" column="user_name"/>
+		<result property="siteId" column="site_id"/>
+	</resultMap> -->
+	<select id="getPlayerInfo" resultType="playerInfo">
+		select * from player_info where id >=#{id}
+	</select>
+	<!--动态传表名，为了分表逻辑  -->
+	<select id="getPlayerInfo1" resultType="playerInfo" >
+		select * from ${table} where id =#{id}
+	</select>
+	
+	<insert id="savePlayer" keyProperty="player.id">
+	 insert into ${table} (account_id,agent_id,user_name,site_id,status,tray)
+	 values(#{player.accountId},#{player.agentId},#{player.userName},#{player.sendingCommand.commandId},#{player.status},#{player.tray})
+	</insert>
+	
+	<insert id="savePlayers" keyProperty="id" >
+	 insert into ${table} (account_id,agent_id,user_name,site_id,status,tray) values
+	 <foreach collection="players" item="item" separator=",">
+	 (#{item.accountId},#{item.agentId},#{item.userName},#{item.siteId},#{item.status},#{item.tray})
+	 </foreach>
+	</insert>
+	<select id="getLastId" resultType="long">
+		select last_insert_id()
+	</select>
+	
+	<select id="getMinId" resultType="int">
+		select MIN(id) from player_info where account_id>=#{accountId}
+	</select>
+	
+	<select id="getMinId1" resultType="int">
+		select count(id) from player_info where ${field} <![CDATA[ <=]]> #{fieldValue}
+	</select>
+	
+	<select id="getCleanId" resultType="cleanIds" >
+		select Min(id) as minId,Max(id) as maxId from ${table} where ${selectField}<![CDATA[ <=]]>#{selectFieldV}
+	</select>
+	
+	<update id="updatePlayerInfo">
+	 update player_info
+	 <set>
+	 	<if test="status!=null">status=#{status},</if>
+	  	<if test="userName!=null">user_name=#{userName}</if>
+	 </set>
+	 where id=#{id}
+	</update>
+</mapper>
