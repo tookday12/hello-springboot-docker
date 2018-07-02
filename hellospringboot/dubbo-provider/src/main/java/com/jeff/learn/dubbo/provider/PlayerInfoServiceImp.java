@@ -7,8 +7,8 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.jeff.learn.dubbo.api.HelloService;
 import com.jeff.learn.dubbo.api.PlayerInfoService;
 
-@Service(interfaceClass=PlayerInfoService.class)
-@Component
+@Service(interfaceClass=PlayerInfoService.class,
+timeout=5000)
 public class PlayerInfoServiceImp implements PlayerInfoService {
 	@Autowired
 	private PlayerInfoMapper playerInfoMapper;
