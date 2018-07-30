@@ -104,5 +104,6 @@
     <module>dubbo-provider</module>
     <module>dubbo-consumer</module>
     <module>hello-util</module>
+    <module>kafka-springboot</module>
   </modules>
 </project>
