@@ -76,6 +76,12 @@ public class AppTest
     	
     }
     
+    
+    public void testCurator() {
+    	
+    }
+    
+    
     public void testSum()
     {
     	List<Integer> l=new ArrayList<>();

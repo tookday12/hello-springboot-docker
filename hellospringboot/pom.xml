@@ -105,5 +105,6 @@
     <module>dubbo-consumer</module>
     <module>hello-util</module>
     <module>kafka-springboot</module>
+    <module>redis-springboot</module>
   </modules>
 </project>

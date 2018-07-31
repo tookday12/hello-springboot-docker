@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- monitorInterval 配置文件刷新间隔，单位为秒 -->
+<Configuration status="DEBUG" monitorInterval="60">  
+ 	<properties>  
+       <!--  <property name="LOG_HOME">logs</property>   -->
+        <property name="spring_FILE_NAME">spring</property> 
+        <property name="dubbo_FILE_NAME">dubbo</property>  
+        <property name="CONSUMER">consumer1</property>
+         <property name="PROVIDER">provider1</property> 
+        <property name="listener_FILE_NAME">listener</property>  
+    </properties> 
+    <Appenders>  
+        <Console name="Console" target="SYSTEM_OUT">  
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS}(%t)[%c]-[%p] %m%n" />  
+        </Console>  
+        <RollingFile name="RollingFile_listener" fileName="${listener_FILE_NAME}.log"
+        filePattern="${listener_FILE_NAME.%d{yyyy-MM-dd.HH}.log" append="true">
+                <!--      filePattern="${LOG_HOME}/${FILE_NAME}.%d{yyyy-MM-dd HH-mm}.%i.log" append="true"> -->
+                <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS}(%t)[%c]-[%p] %m%n"/>
+                <Policies>              
+                	<TimeBasedTriggeringPolicy interval="1" />  
+                	<!-- <SizeBasedTriggeringPolicy size="10kb" />   -->
+            	</Policies> 
+                <DefaultRolloverStrategy max="100"/>
+    	</RollingFile> 
+    	 <RollingFile name="RollingFile_CONSUMER" fileName="${CONSUMER}.log"
+        filePattern="${CONSUMER}.%d{yyyy-MM-dd.HH}.log" append="true">
+                <!--      filePattern="${LOG_HOME}/${FILE_NAME}.%d{yyyy-MM-dd HH-mm}.%i.log" append="true"> -->
+                <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS}(%t)[%c]-[%p] %m%n"/>
+                <Policies>              
+                	<TimeBasedTriggeringPolicy interval="1" />  
+                	<!-- <SizeBasedTriggeringPolicy size="10kb" />   -->
+            	</Policies> 
+                <DefaultRolloverStrategy max="100"/>
+    	</RollingFile> 
+    	 <RollingFile name="RollingFile_PROVIDER" fileName="${PROVIDER}.log"
+        filePattern="${PROVIDER}.%d{yyyy-MM-dd.HH}.log" append="true">
+                <!--      filePattern="${LOG_HOME}/${FILE_NAME}.%d{yyyy-MM-dd HH-mm}.%i.log" append="true"> -->
+                <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS}(%t)[%c]-[%p] %m%n"/>
+                <Policies>              
+                	<TimeBasedTriggeringPolicy interval="1" />  
+                	<!-- <SizeBasedTriggeringPolicy size="10kb" />   -->
+            	</Policies> 
+                <DefaultRolloverStrategy max="100"/>
+    	</RollingFile> 
+        <RollingFile name="RollingFile_spring" fileName="${spring_FILE_NAME}.log"
+        filePattern="${spring_FILE_NAME}.%d{yyyy-MM-dd.HH}.log" append="true">
+                <!--      filePattern="${LOG_HOME}/${FILE_NAME}.%d{yyyy-MM-dd HH-mm}.%i.log" append="true"> -->
+                <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS}(%t)[%c]-[%p] %m%n"/>
+                <Policies>              
+                	<TimeBasedTriggeringPolicy interval="1" />  
+                	<!-- <SizeBasedTriggeringPolicy size="10kb" />   -->
+            	</Policies> 
+                <DefaultRolloverStrategy max="100"/>
+    	</RollingFile> 
+    	<RollingFile name="RollingFile_dubbo" fileName="${dubbo_FILE_NAME}.log"
+        filePattern="${dubbo_FILE_NAME}.%d{yyyy-MM-dd.HH}.log" append="true">
+                <!--      filePattern="${LOG_HOME}/${FILE_NAME}.%d{yyyy-MM-dd HH-mm}.%i.log" append="true"> -->
+                <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS}(%t)[%c]-[%p] %m%n"/>
+                <Policies>              
+                	<TimeBasedTriggeringPolicy interval="1" />  
+                	<!-- <SizeBasedTriggeringPolicy size="10kb" />   -->
+            	</Policies> 
+                <DefaultRolloverStrategy max="100"/>
+    	</RollingFile> 
+    	<RollingFile name="RollingFile_jeff" fileName="${jeff_FILE_NAME}.log"
+        filePattern="${jeff_FILE_NAME}.%d{yyyy-MM-dd.HH}.log" append="true">
+                <!--      filePattern="${LOG_HOME}/${FILE_NAME}.%d{yyyy-MM-dd HH-mm}.%i.log" append="true"> -->
+                <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS}(%t)[%c]-[%p] %m%n"/>
+                <Policies>              
+                	<TimeBasedTriggeringPolicy interval="1" />  
+                	<!-- <SizeBasedTriggeringPolicy size="10kb" />   -->
+            	</Policies> 
+                <DefaultRolloverStrategy max="100"/>
+    	</RollingFile> 
+    </Appenders> 
+    <Loggers>  
+        <Root level="DEBUG">  
+            <AppenderRef ref="RollingFile" /> 
+            <AppenderRef ref="Console" />
+        </Root> 
+       <Logger name="org.springframework" level="DEBUG" additivity="false">
+           <appender-ref ref="RollingFile_spring"/>
+     </Logger> 
+      <Logger name="com.jeff" level="DEBUG" additivity="false">
+           <appender-ref ref="Console"/>
+     </Logger>
+      <Logger name="com.jeff.kafka.springboot.consumer" level="DEBUG" additivity="false">
+           <appender-ref ref="RollingFile_CONSUMER"/>
+           <AppenderRef ref="Console" />
+     </Logger>
+      <Logger name="com.jeff.kafka.springboot.provider" level="DEBUG" additivity="false">
+           <appender-ref ref="RollingFile_PROVIDER"/>
+           <AppenderRef ref="Console" />
+     </Logger>
+      <Logger name="com.jeff" level="DEBUG" additivity="false">
+           <appender-ref ref="Console"/>
+     </Logger>
+      <Logger name="com.alibaba" level="DEBUG" additivity="false">
+           <appender-ref ref="RollingFile_dubbo"/>
+         <!--  <AppenderRef ref="Console" /> -->
+     </Logger> 
+    </Loggers>  
+</Configuration>  
